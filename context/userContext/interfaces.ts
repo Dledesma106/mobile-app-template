@@ -45,3 +45,8 @@ export interface ReducedUser{
     lastName:string;
     _id:string;
 }
+
+export interface LoginResponse{
+  user:UserInterface,
+  access_token:string
+}

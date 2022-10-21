@@ -1,11 +1,10 @@
 import { createContext} from "react";
 import {ReducedUser} from './interfaces'
-
+import {LoginResponse} from './interfaces'
 interface UserContextProps{
     user: ReducedUser;
-    loginUser: () => Promise<void>;
-    logoutUser: () => void;
-    getBaseUrl: () => Promise<string>;
+    loginUser: (data:LoginResponse) => Promise<void>;
+    logoutUser: () => Promise<void>;
     isLoggedIn: () => boolean;
 }
 

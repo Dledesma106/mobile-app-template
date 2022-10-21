@@ -6,27 +6,20 @@
 /* import { FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
  */
+/* import Colors from '../constants/Colors';
+import useColorScheme from '../hooks/useColorScheme'; */
+
+/* import TabOneScreen from '../screens/TabOneScreen';
+import TabTwoScreen from '../screens/TabTwoScreen'; */
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { ColorSchemeName, Pressable, Text } from 'react-native';
-import { Entypo } from '@expo/vector-icons'; 
-/* import Colors from '../constants/Colors';
-import useColorScheme from '../hooks/useColorScheme'; */
-import Test from '../screens/Test';
-import ModalScreen from '../screens/ModalScreen';
-import NotFoundScreen from '../screens/NotFoundScreen';
-/* import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen'; */
+
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
-import Home from '../screens/Home';
-import HeaderButtons from '../components/HeaderButtons';
-import SignIn from '../screens/SignIn';
-import SignUp from '../screens/SignUp';
-import MyPets from '../screens/MyPets';
-import { useUser } from '../hooks/useUser';
 
+import * as Routes from './routes'
 
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
@@ -46,24 +39,20 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
-  const {user, isLoggedIn} = useUser()
+
 
   return (
     <Stack.Navigator initialRouteName='Home'>
       {/* <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} /> */}
-      <Stack.Screen name='Home' component={Home} options={{
-        title: isLoggedIn()?`Hello ${user.firstName}`:'',
-        headerRight:() =>(<HeaderButtons/>),
-       // headerLeft: 
-      }}
+      <Stack.Screen name='Home' component={Routes.Home} 
       />
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Screen name="Test" component={Test} options={{title:'test'}}/>
-      <Stack.Screen name="SignIn" component={SignIn} options={{title:'Sign in'}}/>
-      <Stack.Screen name="SignUp" component={SignUp} options={{title:'Sign up'}}/>
-      <Stack.Screen name='MyPets' component={MyPets} options={{title:'My pets'}}/>
+      <Stack.Screen name="NotFound" component={Routes.NotFoundScreen} options={{ title: 'Oops!' }} />
+      <Stack.Screen name="Test" component={Routes.Test} options={{title:'test'}}/>
+      <Stack.Screen name="SignIn" component={Routes.SignIn} options={{title:'Sign in'}}/>
+      <Stack.Screen name="SignUp" component={Routes.SignUp} options={{title:'Sign up'}}/>
+      <Stack.Screen name='MyPets' component={Routes.MyPets} options={{title:'My pets'}}/>
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen name="Modal" component={Routes.ModalScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );
